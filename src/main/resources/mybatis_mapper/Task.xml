@@ -36,7 +36,7 @@ useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (defaul
 -keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
 -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
   <insert id="setTask" parameterType="com.example.my_schedules.dto.TaskDTO" keyColumn="task_id" useGeneratedKeys="true">
-    insert into task values(#{task_id},#{join_date_id},#{todo_task},#{checkbox_complete},#{rest_task},#{clear_task})
+    insert into task values(#{task_id},#{join_date_id},#{todo_task},#{checkbox_complete},#{rest_task},#{clear_task},#{complete_time})
   </insert>
 
   <update id="putTask" parameterType="com.example.my_schedules.dto.TaskDTO">
