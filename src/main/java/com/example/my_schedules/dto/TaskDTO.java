@@ -8,6 +8,7 @@ public class TaskDTO {
     private String join_date_id;
     private String todo_task;
     private Integer checkbox_complete;
+    private String complete_time;
     private Integer rest_task;
     private Integer clear_task;
 }
