@@ -4,8 +4,46 @@
 
 <mapper namespace="com.example.my_schedules.dao.TaskDAO">
 
+  <!-- resultMap 으로 내가만든 resultMap사용가능    resutlSet -> HashMap -> resultMap -->
+  <!--  <resultMap id="사용 하고 싶은 이름" type="내가 만든 타입 풀주소">-->
+  <!--  primarykey  -->
+  <!--    <id property="해당 클래스 primaryKey 필드 이름" javaType="해당 자바 타입" column="DB명"/>-->
+  <!--  Json변환시 공통적인 필드 빼기  -->
+  <!--    <result property="필드명" column="Db명" javaType="자바타입"/>-->
+  <!--    <association property="1대1 설정한 클래스 필드명" javaType="해당원래 pojo클래스명">-->
+  <!--   association에서 출력하고 싶은 필드명을 뽑지 않을시 automapping으로 모든 컬럼을 출력할수있다   -->
+  <!--    </association>-->
+  <!--    <collection property="1대 n관계로 리스트 출력시 사용" ofType="해당 클래스명 ex) product">-->
+  <!--   세분화 가능하다   -->
+  <!--      <id property="" column="" javaType=""/>-->
+  <!--      <result property="" column="" javaType=""/>-->
+  <!--    </collection>-->
+  <!--  </resultMap>-->
+  <!--  -->
+  <!--  <select id="Dao메소드명" resultMap="result타입과는 다른 내가만든 resultmap 클래스명" parameterType="dao로 넘어오는 타입명">-->
+  <!--  </select>-->
+
   <select id="getAllTask" resultType="com.example.my_schedules.dto.TaskDTO">
     SELECT * FROM task
   </select>
 
+  <select id="gatTaskById" resultType="com.example.my_schedules.dto.TaskDTO" parameterType="int">
+    SELECT * FROM task where task_id = #{id}
+  </select>
+
+<!--
+useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
+-keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
+-keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
+  <insert id="setTask" parameterType="com.example.my_schedules.dto.TaskDTO" keyColumn="task_id" useGeneratedKeys="true">
+    insert into task values(#{task_id},#{join_date_id},#{todo_task},#{checkbox_complete},#{rest_task},#{clear_task})
+  </insert>
+
+  <update id="putTask" parameterType="com.example.my_schedules.dto.TaskDTO">
+    UPDATE task SET todo_task = #{todo_task}  where task_id = #{task_id}
+  </update>
+
+  <delete id="deleteTask" parameterType="int">
+    DELETE FROM task where task_id = #{task_id}
+  </delete>
 </mapper>
