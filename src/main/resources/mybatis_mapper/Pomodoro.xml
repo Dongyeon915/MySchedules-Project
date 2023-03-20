@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.my_schedules.dao.PomodoroDAO">
+  <!--
+useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
+-keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
+-keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
+  <select id="getAllInterver" resultType="com.example.my_schedules.dto.PomodoroDTO">
+    SELECT * FROM pomodoro
+  </select>
+  
+  <insert id="plusInterver" parameterType="com.example.my_schedules.dto.PomodoroDTO"
+    keyProperty="date" useGeneratedKeys="true" keyColumn="date">
+    insert into pomodoro(date,interver) values(#{date},#{interver});
+  </insert>
+
+</mapper>
