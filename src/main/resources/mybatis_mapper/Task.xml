@@ -23,11 +23,11 @@
   <!--  <select id="Dao메소드명" resultMap="result타입과는 다른 내가만든 resultmap 클래스명" parameterType="dao로 넘어오는 타입명">-->
   <!--  </select>-->
 
-  <select id="getAllTask" resultType="com.example.my_schedules.dto.TaskDTO">
+  <select id="getAllTask" resultType="TaskDto">
     SELECT * FROM task
   </select>
 
-  <select id="gatTaskById" resultType="com.example.my_schedules.dto.TaskDTO" parameterType="int">
+  <select id="gatTaskById" resultType="TaskDto" parameterType="int">
     SELECT * FROM task where task_id = #{id}
   </select>
 
@@ -35,11 +35,16 @@
 useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
 -keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
 -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
-  <insert id="setTask" parameterType="com.example.my_schedules.dto.TaskDTO" keyColumn="task_id" useGeneratedKeys="true">
-    insert into task values(#{task_id},#{join_date_id},#{todo_task},#{checkbox_complete},#{rest_task},#{clear_task},#{complete_time})
+  <insert id="setTask" parameterType="TaskDto" keyColumn="task_id" useGeneratedKeys="true" keyProperty="task_id">
+    insert into task(todo_task,complete_time,date) values(#{todo_task},#{complete_time},#{date})
   </insert>
 
-  <update id="putTask" parameterType="com.example.my_schedules.dto.TaskDTO">
+<!-- 체크박스 입력 -->
+  <update id="setCheckboxComplete" parameterType="TaskDto">
+    UPDATE task SET checkbox_complete = #{checkbox_complete},complete_time = #{complete_time}  where task_id = #{task_id}
+  </update>
+
+  <update id="putTask" parameterType="TaskDto">
     UPDATE task SET todo_task = #{todo_task}  where task_id = #{task_id}
   </update>
 
