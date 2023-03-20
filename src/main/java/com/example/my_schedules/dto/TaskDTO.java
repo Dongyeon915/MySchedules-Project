@@ -1,14 +1,13 @@
 package com.example.my_schedules.dto;
 
+import java.util.Date;
 import lombok.Data;
 
 @Data
 public class TaskDTO {
+    private Date date;
     private Integer task_id;
-    private String join_date_id;
     private String todo_task;
-    private Integer checkbox_complete;
-    private String complete_time;
-    private Integer rest_task;
-    private Integer clear_task;
+    private Boolean checkbox_complete;
+    private Date complete_time;
 }
