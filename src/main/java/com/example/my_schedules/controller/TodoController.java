@@ -37,10 +37,16 @@ public class TodoController {
     @PostMapping
     public ResponseEntity<Object> setTask(@RequestBody TaskDTO taskDTO){
         int result = taskDAO.setTask(taskDTO);
+        System.out.println(result);
         if (result != 1){
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task를 확인 해주세요");
         }
         return ResponseEntity.status(HttpStatus.OK).body(taskDTO);
+    }
+
+    @PutMapping("/checkbox/{task_id}")
+    public Object setCheckboxComplete(@RequestBody TaskDTO taskDTO){
+        return taskDAO.setCheckboxComplete(taskDTO);
     }
 
     @PutMapping

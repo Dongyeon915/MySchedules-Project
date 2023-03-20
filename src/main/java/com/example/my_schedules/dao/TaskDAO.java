@@ -11,6 +11,9 @@ public interface TaskDAO {
 
     public int setTask(TaskDTO taskDTO);
 
+//  체크박스 이벤트
+    public int setCheckboxComplete(TaskDTO taskDTO);
+
     public int putTask(TaskDTO taskDTO);
 
     public int deleteTask(int task_id);
