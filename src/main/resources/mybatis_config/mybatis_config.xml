@@ -3,8 +3,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+<!-- 순서를 따진다 -->
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
   <!-- Aliases 약어사용 -->
   <typeAliases>
     <typeAlias type="com.example.my_schedules.dto.TaskDTO" alias="TaskDto"/>
+    <typeAlias type="com.example.my_schedules.dto.PomodoroDTO" alias="PomodoroDTO"/>
   </typeAliases>
 </configuration>
