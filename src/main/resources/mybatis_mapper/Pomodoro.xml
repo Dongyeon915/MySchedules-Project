@@ -7,13 +7,34 @@
 useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
 -keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
 -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
-  <select id="getAllInterver" resultType="com.example.my_schedules.dto.PomodoroDTO">
+
+  <!-- 모든 유저의 정보를 가져온다 -->
+  <select id="getAllInfo" resultType="com.example.my_schedules.dto.PomodoroDTO">
     SELECT * FROM pomodoro
   </select>
-  
-  <insert id="plusInterver" parameterType="com.example.my_schedules.dto.PomodoroDTO"
-    keyProperty="date" useGeneratedKeys="true" keyColumn="date">
-    insert into pomodoro(date,interver) values(#{date},#{interver});
+
+<!-- userId로 해당 유저의 pomodoro 조회 -->
+  <select id="getAllPomodoroByID" parameterType="int" resultType="PomodoroDTO">
+    SELECT * FROM pomodoro where userId = #{userId}
+  </select>
+
+  <!-- 유저 아이디로 해당 날 조회 -->
+  <select id="getPomodoroByDate" parameterType="PomodoroDTO" resultType="PomodoroDTO">
+    SELECT * FROM pomodoro where userId = #{userId} and date = #{date}
+  </select>
+
+  <!-- userId가 일치하는 유저의 interval을 증가 -->
+  <update id="updateInterval" parameterType="PomodoroDTO">
+    UPDATE pomodoro SET `interval` = `interval` + 1, date = #{date} where userId = #{userId}
+  </update>
+
+  <!-- userId가 일치하는 유저의 restInterval을 증가 -->
+  <update id="updateRestInterval" parameterType="PomodoroDTO">
+    UPDATE pomodoro SET restInterval = restInterval + 1, date = #{date} where userId = #{userId}
+  </update>
+
+  <insert id="createNewDayPomodoro" parameterType="PomodoroDTO" useGeneratedKeys="true" keyProperty="pomoId">
+    INSERT INTO pomodoro values(null, #{interval}, #{restInterval}, #{date}, #{userId}, #{minute}, #{rest})
   </insert>
 
 </mapper>
