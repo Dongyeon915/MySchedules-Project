@@ -27,19 +27,22 @@
     SELECT * FROM task
   </select>
 
-<!--
-useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
--keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
--keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
+  <!--
+  useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
+  -keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
+  -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
 
-<!-- 자바 DTO형식으로 GETTER가 생성 되기 때문에 DTO에맞는 형식으로 넣어줘야한다 -->
-  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true" keyProperty="taskId">
-    insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date}, #{userId})
+  <!-- 자바 DTO형식으로 GETTER가 생성 되기 때문에 DTO에맞는 형식으로 넣어줘야한다 -->
+  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true"
+    keyProperty="taskId">
+    insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date},
+    #{userId})
   </insert>
 
-<!-- 체크박스 입력 -->
+  <!-- 체크박스 입력 -->
   <update id="setCheckboxComplete" parameterType="TaskDto">
-    UPDATE task SET checkbox_complete = #{checkboxComplete},complete_time = #{completeTime}  where task_id = #{taskId}
+    UPDATE task SET checkbox_complete = #{checkboxComplete},complete_time = #{completeTime} where
+    task_id = #{taskId}
   </update>
 
   <update id="putTask" parameterType="TaskDto">
@@ -49,4 +52,13 @@ useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (defaul
   <delete id="deleteTask" parameterType="int">
     DELETE FROM task where task_id = #{taskId}
   </delete>
+
+  <!-- clearTask올리기 -->
+  <update id="setClearTask" parameterType="com.example.my_schedules.dto.TodoResultDTO">
+    UPDATE todo_result SET clear_task = clear_task + 1 where user_id = #{userId}
+  </update>
+
+  <update id="setRestTask" parameterType="com.example.my_schedules.dto.TodoResultDTO">
+    UPDATE todo_result SET rest_task = rest_task + 1 where user_id = #{userId} and date = #{date}
+  </update>
 </mapper>

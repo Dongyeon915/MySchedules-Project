@@ -2,6 +2,7 @@ package com.example.my_schedules.controller;
 
 import com.example.my_schedules.dao.TaskDAO;
 import com.example.my_schedules.dto.TaskDTO;
+import com.example.my_schedules.dto.TodoResultDTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,8 @@ public class TodoController {
     private TaskDAO taskDAO;
 
     @GetMapping
-    public List<TaskDTO> getAllTask(){
+    public List<TaskDTO> getAllTask() {
         return taskDAO.getAllTask();
-    }
-
-    @GetMapping("/id/{id}")
-    public TaskDTO getByTaskId(@PathVariable int id){
-        return taskDAO.gatTaskById(id);
     }
 
     @PostMapping
@@ -46,6 +42,21 @@ public class TodoController {
 
     @PutMapping("/checkbox/{task_id}")
     public Object setCheckboxComplete(@RequestBody TaskDTO taskDTO){
+        // Complete DB Update
+////       userId받기 확인
+//        System.out.println(taskDTO);
+////       체크박스 true확인
+//        System.out.println(taskDTO.getCheckboxComplete());
+        if (taskDTO.getCheckboxComplete()) {
+//            유저아이디 2번확인
+//            System.out.println("체크박스 트루야" + taskDTO.getUserId());
+            TodoResultDTO clear = new TodoResultDTO();
+            clear.setUserId(taskDTO.getUserId());
+            System.out.println("넣어진건지 확인" + clear);
+            taskDAO.setClearTask(clear);
+        } else {
+//            taskDAO.setRestTask(taskDTO.getUserId());
+        }
         return taskDAO.setCheckboxComplete(taskDTO);
     }
 

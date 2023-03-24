@@ -1,11 +1,15 @@
 package com.example.my_schedules.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Date;
 import lombok.Data;
 
 @Data
+@JsonNaming(SnakeCaseStrategy.class)
 public class TodoResultDTO {
+    private Integer userId;
     private Date date;
-    private Integer rest_task;
-    private Integer clear_task;
+    private Integer restTask;
+    private Integer clearTask;
 }
