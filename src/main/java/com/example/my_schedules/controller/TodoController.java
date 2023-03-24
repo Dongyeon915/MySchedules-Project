@@ -52,10 +52,14 @@ public class TodoController {
 //            System.out.println("체크박스 트루야" + taskDTO.getUserId());
             TodoResultDTO clear = new TodoResultDTO();
             clear.setUserId(taskDTO.getUserId());
+//            date조건을 추가하면 db에 저장되지않음
+//            clear.setDate(taskDTO.getDate());
             System.out.println("넣어진건지 확인" + clear);
             taskDAO.setClearTask(clear);
         } else {
-//            taskDAO.setRestTask(taskDTO.getUserId());
+            TodoResultDTO rest = new TodoResultDTO();
+            rest.setUserId(taskDTO.getUserId());
+            taskDAO.setRestTask(rest);
         }
         return taskDAO.setCheckboxComplete(taskDTO);
     }
