@@ -55,10 +55,10 @@
 
   <!-- clearTask올리기 -->
   <update id="setClearTask" parameterType="com.example.my_schedules.dto.TodoResultDTO">
-    UPDATE todo_result SET clear_task = clear_task + 1 where user_id = #{userId}
+    UPDATE todo_result SET clear_task = clear_task + 1,rest_task = rest_task - 1 where user_id = #{userId}
   </update>
 
   <update id="setRestTask" parameterType="com.example.my_schedules.dto.TodoResultDTO">
-    UPDATE todo_result SET rest_task = rest_task + 1 where user_id = #{userId} and date = #{date}
+    UPDATE todo_result SET rest_task = rest_task + 1,clear_task = clear_task - 1 where user_id = #{userId}
   </update>
 </mapper>
