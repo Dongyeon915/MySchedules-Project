@@ -32,33 +32,30 @@ public class TodoController {
 
     @PostMapping
     public ResponseEntity<Object> setTask(@RequestBody TaskDTO taskDTO){
+        TodoResultDTO restValue = new TodoResultDTO();
+        restValue.setUserId(taskDTO.getUserId());
+        restValue.setDate(taskDTO.getDate());
+        restValue.setRestTask(1);
+        restValue.setClearTask(0);
+        taskDAO.setDefaultRestTask(restValue);
         int result = taskDAO.setTask(taskDTO);
-        System.out.println(result);
-        if (result != 1){
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task를 확인 해주세요");
+        if (result != 1) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task를 확인 해주세요");
         }
         return ResponseEntity.status(HttpStatus.OK).body(taskDTO);
     }
 
     @PutMapping("/checkbox/{task_id}")
     public Object setCheckboxComplete(@RequestBody TaskDTO taskDTO){
-        // Complete DB Update
-////       userId받기 확인
-//        System.out.println(taskDTO);
-////       체크박스 true확인
-//        System.out.println(taskDTO.getCheckboxComplete());
         if (taskDTO.getCheckboxComplete()) {
-//            유저아이디 2번확인
-//            System.out.println("체크박스 트루야" + taskDTO.getUserId());
             TodoResultDTO clear = new TodoResultDTO();
             clear.setUserId(taskDTO.getUserId());
-//            date조건을 추가하면 db에 저장되지않음
-//            clear.setDate(taskDTO.getDate());
-            System.out.println("넣어진건지 확인" + clear);
+            clear.setDate(taskDTO.getDate());
             taskDAO.setClearTask(clear);
         } else {
             TodoResultDTO rest = new TodoResultDTO();
             rest.setUserId(taskDTO.getUserId());
+            rest.setDate(taskDTO.getDate());
             taskDAO.setRestTask(rest);
         }
         return taskDAO.setCheckboxComplete(taskDTO);

@@ -17,7 +17,7 @@ public interface TaskDAO {
     public int putTask(TaskDTO taskDTO);
 
     public int deleteTask(int taskId);
-
+    public int setDefaultRestTask(TodoResultDTO restTask);
     public int setClearTask(TodoResultDTO clear);
     public int setRestTask(TodoResultDTO clear);
 }
