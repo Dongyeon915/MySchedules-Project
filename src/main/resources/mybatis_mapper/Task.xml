@@ -33,8 +33,7 @@
   -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
 
   <!-- 자바 DTO형식으로 GETTER가 생성 되기 때문에 DTO에맞는 형식으로 넣어줘야한다 -->
-  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true"
-    keyProperty="taskId">
+  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true" keyProperty="taskId">
     insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date},
     #{userId})
   </insert>
@@ -53,19 +52,15 @@
     DELETE FROM task where task_id = #{taskId}
   </delete>
 
-<!-- 초기 result 유저 받기 -->
+  <!-- 초기 result 유저 받기 -->
   <insert id="setDefaultRestTask" parameterType="TodoResultDTO">
-<!--    INSERT INTO todo_result value(#{userId},#{date},#{restTask},#{clearTask})-->
-<!--    UPDATE todo_result SET  where date = #{date} and user_id= #{userId} -->
-
+    INSERT INTO todo_result VALUES(#{restTask}, #{clearTask}, #{date}, #{userId}) ON DUPLICATE KEY UPDATE rest_task = rest_task + 1
   </insert>
 
   <!-- clearTask올리기 -->
   <update id="setClearTask" parameterType="TodoResultDTO">
-    UPDATE todo_result SET clear_task = clear_task + 1,rest_task = rest_task - 1 where user_id = #{userId} and date = #{date}
+    UPDATE todo_result SET clear_task = clear_task + 1,rest_task = rest_task - 1 where user_id =
+    #{userId} and date = #{date}
   </update>
 
-  <update id="setRestTask" parameterType="TodoResultDTO">
-    UPDATE todo_result SET rest_task = rest_task + 1,clear_task = clear_task - 1 where user_id = #{userId} and date = #{date}
-  </update>
 </mapper>
