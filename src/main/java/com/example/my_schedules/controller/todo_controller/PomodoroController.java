@@ -53,26 +53,6 @@ public class PomodoroController {
         return pomodoroDTO;
     }
 
-//    @GetMapping
-//    PomodoroDTO getPomodoro(@RequestParam(required = false) Integer userID,
-//        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-//        return pomodoroDAO.getPomodoro(date.toString());
-//    }
-
-//    최초 유저 정보 입력란
-//    @PutMapping
-//    public int setUserInfo(@RequestBody PomodoroDTO pomodoroDTO) {
-//        // date, userID colume
-//        System.out.println(pomodoroDTO.toString());
-//        return pomodoroDAO.setUserInfo(pomodoroDTO);
-//    }
-
-// userId와 일치하는 user의 interval값을 증가
-//    @PutMapping("/interval")
-//    public int updateInterval(@RequestBody PomodoroDTO pomodoroDTO){
-//        return pomodoroDAO.updateInterval(pomodoroDTO);
-//    }
-
     @PutMapping("/restinterval")
     public int updaterestInterval(@RequestBody PomodoroDTO pomodoroDTO){
         return pomodoroDAO.updateRestInterval(pomodoroDTO);
