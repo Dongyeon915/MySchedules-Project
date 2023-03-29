@@ -25,15 +25,21 @@ public class TodoController {
 
     @Autowired
     private TaskDAO taskDAO;
-
+// 초기모든유저 가져오기
 //    @GetMapping
 //    public List<TaskDTO> getAllTask() {
 //        return taskDAO.getAllTask();
 //    }
 
-    @GetMapping("/user/{id}")
-    public void getUserInfo(@RequestBody TaskUserDTO taskUserDTO){
-
+//    유저로만 가져오기
+//    @GetMapping("/user/{id}")
+//    public List<TaskDTO> getUserById(@PathVariable int id){
+//        System.out.println(id);
+//        return taskDAO.getUserById(id);
+//    }
+    @PostMapping("/user")
+    public List<TaskDTO> getUserById(@RequestBody TaskDTO taskDTO){
+        return taskDAO.getUserById(taskDTO);
     }
 
     @PostMapping
