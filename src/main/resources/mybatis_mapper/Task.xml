@@ -23,6 +23,7 @@
   <!--  <select id="Dao메소드명" resultMap="result타입과는 다른 내가만든 resultmap 클래스명" parameterType="dao로 넘어오는 타입명">-->
   <!--  </select>-->
 
+  <!-- 미사용중 모든 userId 정보를 가져온다 미사용 -->
   <select id="getAllTask" resultType="TaskDto">
     SELECT * FROM task
   </select>
@@ -33,10 +34,21 @@
   -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
 
   <!-- 자바 DTO형식으로 GETTER가 생성 되기 때문에 DTO에맞는 형식으로 넣어줘야한다 -->
-  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true" keyProperty="taskId">
+  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true"
+    keyProperty="taskId">
     insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date},
     #{userId})
   </insert>
+
+  <!--    userId가 일치하는 user만 가져온다 미사용-->
+  <!--  <select id="getUserById" parameterType="int" resultType="TaskDto">-->
+  <!--    SELECT * FROM task where user_id = #{userId}-->
+  <!--  </select>-->
+
+  <!-- 날짜포함 확인  사용중 -->
+  <select id="getUserById" parameterType="TaskDto" resultType="TaskDto">
+    SELECT * FROM task where user_id = #{userId} and date =#{date}
+  </select>
 
   <!-- 체크박스 입력 -->
   <update id="setCheckboxComplete" parameterType="TaskDto">
@@ -54,7 +66,8 @@
 
   <!-- 초기 result 유저 받기 -->
   <insert id="setDefaultRestTask" parameterType="TodoResultDTO">
-    INSERT INTO todo_result VALUES(#{restTask}, #{clearTask}, #{date}, #{userId}) ON DUPLICATE KEY UPDATE rest_task = rest_task + 1
+    INSERT INTO todo_result VALUES(#{restTask}, #{clearTask}, #{date}, #{userId}) ON DUPLICATE KEY
+    UPDATE rest_task = rest_task + 1
   </insert>
 
   <!-- clearTask올리기 -->
