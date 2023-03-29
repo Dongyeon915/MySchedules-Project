@@ -8,7 +8,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TaskDAO {
 
+    //  모든 userId 정보를 가져온다 미사용
     public List<TaskDTO> getAllTask();
+
+    //  userId가 일치하는 user만 가져온다 미사용
+    public List<TaskDTO> getUserById(int id);
+
+    //  날짜포함 테스트
+    public List<TaskDTO> getUserById(TaskDTO taskDTO);
 
     public int setTask(TaskDTO taskDTO);
 
