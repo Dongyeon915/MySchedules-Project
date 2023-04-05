@@ -29,4 +29,5 @@ public interface TaskDAO {
     public int setDefaultRestTask(TodoResultDTO restTask);
 
     public int setClearTask(TodoResultDTO clear);
+
 }

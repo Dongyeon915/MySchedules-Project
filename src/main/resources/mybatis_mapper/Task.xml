@@ -64,7 +64,7 @@
     DELETE FROM task where task_id = #{taskId}
   </delete>
 
-  <!-- 초기 result 유저 받기 -->
+
   <insert id="setDefaultRestTask" parameterType="TodoResultDTO">
     INSERT INTO todo_result VALUES(#{restTask}, #{clearTask}, #{date}, #{userId}) ON DUPLICATE KEY
     UPDATE rest_task = rest_task + 1
@@ -75,5 +75,6 @@
     UPDATE todo_result SET clear_task = clear_task + 1,rest_task = rest_task - 1 where user_id =
     #{userId} and date = #{date}
   </update>
+  
 
 </mapper>

@@ -1,4 +1,4 @@
-package com.example.my_schedules.controller;
+package com.example.my_schedules.controller.todo_controller;
 
 import com.example.my_schedules.dao.TaskDAO;
 import com.example.my_schedules.dto.TaskDTO;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.my_schedules.dao.TodoResultDAO">
+<!-- userId 와 해당date 가 맞는 rest,clear 가져오기 -->
+  <select id="getResultByUser" resultType="TodoResultDTO" parameterType="TodoResultDTO">
+    select * from todo_result where user_id = #{userId} and date = #{date}
+  </select>
+</mapper>
