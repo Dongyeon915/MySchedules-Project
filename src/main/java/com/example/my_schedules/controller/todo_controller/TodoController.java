@@ -2,7 +2,6 @@ package com.example.my_schedules.controller.todo_controller;
 
 import com.example.my_schedules.dao.TaskDAO;
 import com.example.my_schedules.dto.TaskDTO;
-import com.example.my_schedules.dto.TaskUserDTO;
 import com.example.my_schedules.dto.TodoResultDTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,14 +29,14 @@ public class TodoController {
 //        return taskDAO.getAllTask();
 //    }
 
-//    유저로만 가져오기
+    //    유저로만 가져오기
 //    @GetMapping("/user/{id}")
 //    public List<TaskDTO> getUserById(@PathVariable int id){
 //        System.out.println(id);
 //        return taskDAO.getUserById(id);
 //    }
     @PostMapping("/user")
-    public List<TaskDTO> getUserById(@RequestBody TaskDTO taskDTO){
+    public List<TaskDTO> getUserById(@RequestBody TaskDTO taskDTO) {
         return taskDAO.getUserById(taskDTO);
     }
 
