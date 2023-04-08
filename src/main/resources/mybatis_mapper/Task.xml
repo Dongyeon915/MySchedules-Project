@@ -34,10 +34,8 @@
   -keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
 
   <!-- 자바 DTO형식으로 GETTER가 생성 되기 때문에 DTO에맞는 형식으로 넣어줘야한다 -->
-  <insert id="setTask" parameterType="TaskDto" keyColumn="taskId" useGeneratedKeys="true"
-    keyProperty="taskId">
-    insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date},
-    #{userId})
+  <insert id="setTask" parameterType="TaskDto" useGeneratedKeys="true" keyColumn="taskId" keyProperty="taskId">
+    insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date}, #{userId})
   </insert>
 
   <!--    userId가 일치하는 user만 가져온다 미사용-->
@@ -64,9 +62,8 @@
     DELETE FROM task where task_id = #{taskId}
   </delete>
 
-
   <insert id="setDefaultRestTask" parameterType="TodoResultDTO">
-    INSERT INTO todo_result VALUES(#{restTask}, #{clearTask}, #{date}, #{userId}) ON DUPLICATE KEY
+    INSERT INTO todo_result(rest_task,clear_task,date,user_id) VALUES(#{restTask},#{clearTask},#{date},#{userId}) ON DUPLICATE KEY
     UPDATE rest_task = rest_task + 1
   </insert>
 
@@ -75,6 +72,6 @@
     UPDATE todo_result SET clear_task = clear_task + 1,rest_task = rest_task - 1 where user_id =
     #{userId} and date = #{date}
   </update>
-  
+
 
 </mapper>
