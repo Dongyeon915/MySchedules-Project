@@ -23,6 +23,13 @@ public class TilController {
     @Autowired
     TilDAO tilDAO;
 
+//    작업중
+    @GetMapping("/page/{pageId}")
+    public List<TilDTO> getPage(@PathVariable int pageId){
+        return tilDAO.getPage(pageId);
+    }
+
+
     @GetMapping
     public List<TilDTO> getUsetByTilContent(){
         return tilDAO.getUsetByTilContent();
