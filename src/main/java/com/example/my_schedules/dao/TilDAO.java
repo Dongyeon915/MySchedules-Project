@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TilDAO {
+//    작업중
+    public List<TilDTO> getPage(int pageId);
 
     public List<TilDTO> getUsetByTilContent();
 
