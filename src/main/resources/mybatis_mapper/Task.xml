@@ -62,6 +62,7 @@
     DELETE FROM task where task_id = #{taskId}
   </delete>
 
+<!-- userId를 primary key로 잡으면 데이트는 계속해서 해당날로 insert작업을 수행하기에 date를 임시로 잡아넣었다 입력시 userId를 post로 넣으니 겹치긴힘들다 -->
   <insert id="setDefaultRestTask" parameterType="TodoResultDTO">
     INSERT INTO todo_result(rest_task,clear_task,date,user_id) VALUES(#{restTask},#{clearTask},#{date},#{userId}) ON DUPLICATE KEY
     UPDATE rest_task = rest_task + 1
