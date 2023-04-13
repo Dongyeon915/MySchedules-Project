@@ -15,6 +15,9 @@ public interface PomodoroDAO {
 
     public PomodoroDTO getPomodoroByDate(PomodoroDTO pomodoroDTO);
 
+//    해당 유저의 모든 정보를 가져오기
+    public List<PomodoroDTO> getPomodoroByID(PomodoroDTO pomodoroDTO);
+
     public int updateInterval(PomodoroDTO pomodoroDTO);
 
     public int updateRestInterval(PomodoroDTO pomodoroDTO);
