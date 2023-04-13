@@ -22,4 +22,10 @@ public class TodoResultController {
     public TodoResultDTO getResultByUser(@RequestBody TodoResultDTO todoResultDTO){
         return todoResultDAO.getResultByUser(todoResultDTO);
     }
+
+//    total값을 구하기위해 사용중
+    @PostMapping("/userId")
+    public List<TodoResultDTO> getAllResultByUser(@RequestBody TodoResultDTO todoResultDTO){
+        return todoResultDAO.getAllResultByUser(todoResultDTO);
+    }
 }
