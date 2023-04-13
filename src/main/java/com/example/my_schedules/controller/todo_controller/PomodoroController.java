@@ -34,9 +34,9 @@ public class PomodoroController {
         return pomodoroDAO.getPomodoroByDate(pomodoroDTO);
     }
 
-    @GetMapping("/userId/{userid}")
-    public List<PomodoroDTO> getPomodoroByID(@PathVariable int userid){
-        return pomodoroDAO.getAllPomodoroByID(userid);
+    @PostMapping("/userId")
+    public List<PomodoroDTO> getPomodoroByID(@RequestBody PomodoroDTO pomodoroDTO){
+        return pomodoroDAO.getPomodoroByID(pomodoroDTO);
     }
 
     @PostMapping("/interval/{type}")
