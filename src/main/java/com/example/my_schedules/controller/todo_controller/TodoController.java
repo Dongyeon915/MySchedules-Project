@@ -76,10 +76,16 @@ public class TodoController {
 
     @DeleteMapping("/{task_id}")
     public ResponseEntity<Object> deleteTask(@PathVariable int task_id) {
+        TodoResultDTO todoResultDTO = new TodoResultDTO();
         int result = taskDAO.deleteTask(task_id);
         if (result != 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 값을 확인해주세요");
         }
         return ResponseEntity.status(HttpStatus.OK).body(task_id);
+    }
+
+    @DeleteMapping
+    public int deleteTaskResult(@RequestBody TodoResultDTO todoResultDTO){
+       return taskDAO.deleteTaskResult(todoResultDTO);
     }
 }

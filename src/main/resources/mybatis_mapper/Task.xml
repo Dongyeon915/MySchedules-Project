@@ -73,6 +73,11 @@
     UPDATE todo_result SET clear_task = clear_task + 1,rest_task = rest_task - 1 where user_id =
     #{userId} and date = #{date}
   </update>
+<!-- task삭제시 result의 갯수를 줄여준다 -->
+  <update id="deleteTaskResult" parameterType="TodoResultDTO">
+    UPDATE todo_result SET rest_task = rest_task - 1 where user_id =
+    #{userId} and date = #{date}
+  </update>
 
 
 </mapper>

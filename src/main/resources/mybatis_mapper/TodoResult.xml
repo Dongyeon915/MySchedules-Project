@@ -11,4 +11,5 @@
   <select id="getAllResultByUser" resultType="TodoResultDTO" parameterType="TodoResultDTO">
     select * from todo_result where user_id = #{userId}
   </select>
+
 </mapper>

@@ -30,4 +30,8 @@ public interface TaskDAO {
 
     public int setClearTask(TodoResultDTO clear);
 
+//    task삭제시 result갯수줄이기
+    public int deleteTaskResult(TodoResultDTO todoResultDTO);
+
+
 }

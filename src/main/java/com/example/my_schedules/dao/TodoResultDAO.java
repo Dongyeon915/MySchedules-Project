@@ -14,4 +14,5 @@ public interface TodoResultDAO {
 //    해당유저의 rest와 clear를 가져온다
     public List<TodoResultDTO> getAllResultByUser(TodoResultDTO todoResultDTO);
 
+
 }
