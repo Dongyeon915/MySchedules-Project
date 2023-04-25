@@ -4,6 +4,7 @@ import com.example.my_schedules.dao.TaskDAO;
 import com.example.my_schedules.dto.TaskDTO;
 import com.example.my_schedules.dto.TodoResultDTO;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -24,25 +25,14 @@ public class TodoController {
 
     @Autowired
     private TaskDAO taskDAO;
-// 초기모든유저 가져오기
-//    @GetMapping
-//    public List<TaskDTO> getAllTask() {
-//        return taskDAO.getAllTask();
-//    }
 
-    //    유저로만 가져오기
-//    @GetMapping("/user/{id}")
-//    public List<TaskDTO> getUserById(@PathVariable int id){
-//        System.out.println(id);
-//        return taskDAO.getUserById(id);
-//    }
     @PostMapping("/user")
     public List<TaskDTO> getUserById(@RequestBody TaskDTO taskDTO) {
         return taskDAO.getUserById(taskDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Object> setTask(@RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<Object> setTask(@Valid @RequestBody TaskDTO taskDTO) {
         TodoResultDTO restValue = new TodoResultDTO();
         restValue.setUserId(taskDTO.getUserId());
         restValue.setDate(taskDTO.getDate());
@@ -66,7 +56,7 @@ public class TodoController {
     }
 
     @PutMapping
-    public ResponseEntity<Object> putTask(@RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<Object> putTask(@Valid @RequestBody TaskDTO taskDTO) {
         int result = taskDAO.putTask(taskDTO);
         if (result != 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("수정 값을 확인 해주세요");

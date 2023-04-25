@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.my_schedules.dao.AuthorityDAO">
+  <insert id="setUserAuthority" parameterType="com.example.my_schedules.dto.AuthorityDTO" keyProperty="userId" useGeneratedKeys="true" keyColumn="userId">
+    insert into authority values(null,#{authority})
+  </insert>
+</mapper>

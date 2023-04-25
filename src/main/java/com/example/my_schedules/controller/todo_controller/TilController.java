@@ -4,6 +4,7 @@ import com.example.my_schedules.dao.TilDAO;
 import com.example.my_schedules.dto.TilDTO;
 import com.example.my_schedules.dto.TuiDTO;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,7 +24,6 @@ public class TilController {
     @Autowired
     TilDAO tilDAO;
 
-//    작업중
     @GetMapping("/page/{pageId}")
     public List<TilDTO> getPage(@PathVariable int pageId){
         return tilDAO.getPage(pageId);
@@ -41,13 +41,13 @@ public class TilController {
     }
 
     @PostMapping
-    public int setContent(@RequestBody TilDTO tilDTO){
+    public int setContent(@Valid @RequestBody TilDTO tilDTO){
         tilDAO.setContent(tilDTO);
         return tilDTO.getTuiId();
     }
 
     @PutMapping
-    public int updateContent(@RequestBody TilDTO tilDTO){
+    public int updateContent(@Valid @RequestBody TilDTO tilDTO){
         tilDAO.updateContent(tilDTO);
         return tilDTO.getTuiId();
     }
