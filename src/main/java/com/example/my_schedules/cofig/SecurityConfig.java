@@ -1,29 +1,39 @@
 package com.example.my_schedules.cofig;
 
+import com.example.my_schedules.filter.JwtAuthFilter;
+import com.example.my_schedules.oauth.OAuthSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity(debug = true)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity(debug = false)
 public class SecurityConfig {
 
-    //    AuthenticationConfiguration는 애플리케이션 또는 서비스에서 사용자 인증을 구성하기 위한 설정 모음입니다.
-//    이 설정은 사용자가 로그인할 때 사용되는 인증 메커니즘,
-//    사용자 정보를 저장하고 보호하기 위한 보안 구성, 사용자 세션 관리를 위한 설정 등을 포함할 수 있습니다.
+    @Autowired
+    OAuthSuccessHandler authSuccessHandler;
+
+    @Autowired
+    JwtAuthFilter jwtAuthFilter;
+
     @Bean
-    DefaultSecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,AuthenticationConfiguration authenticationConfiguration)
-        throws Exception {
-        httpSecurity.csrf().disable();
-//        httpSecurity.cors().disable();
-        httpSecurity.authorizeRequests()
-            .antMatchers("/").permitAll()
-            .anyRequest().permitAll();
-        return httpSecurity.build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.httpBasic().disable();
+        http.cors().disable();
+        http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.oauth2Login().successHandler(authSuccessHandler);
+        http.oauth2Login().loginPage("/login");
+//        UsernamePasswordAuthenticationFilter principal 세팅
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated();
+        return http.build();
     }
 }
