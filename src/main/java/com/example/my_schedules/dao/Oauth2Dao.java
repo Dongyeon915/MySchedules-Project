@@ -9,4 +9,6 @@ public interface Oauth2Dao {
     public MyUserDTO getUserByEmail(String email);
 
     public int saveUser(MyUserDTO user);
+
+    public int updateUser(MyUserDTO user);
 }
