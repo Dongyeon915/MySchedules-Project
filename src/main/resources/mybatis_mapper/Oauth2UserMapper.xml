@@ -9,7 +9,11 @@
   </select>
 
   <insert id="saveUser" parameterType="com.example.my_schedules.dto.MyUserDTO">
-    INSERT INTO member (user_id, email, nickname, profile) values (#{userID}, #{email}, #{name}, #{profile})
+    INSERT INTO member (user_id, email, name, profile) values (#{userID}, #{email}, #{name}, #{profile})
   </insert>
+
+  <update id="updateUser" parameterType="com.example.my_schedules.dto.MyUserDTO">
+    UPDATE member SET profile = #{profile}, name = #{name} where user_id = #{userID}
+  </update>
 </mapper>
 
