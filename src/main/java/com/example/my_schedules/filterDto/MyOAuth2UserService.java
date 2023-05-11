@@ -3,6 +3,9 @@ package com.example.my_schedules.filterDto;
 import com.example.my_schedules.dao.Oauth2Dao;
 import com.example.my_schedules.dto.MyUserDTO;
 import com.example.my_schedules.utils.AttributeUtil;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,17 +32,22 @@ public class MyOAuth2UserService extends DefaultOAuth2UserService {
         String clientName = userRequest.getClientRegistration().getClientName().toUpperCase();
         Map<String, Object> attributes = AttributeUtil.getOAuthAttribute(clientName,
             oAuth2User.getAttributes());
-//        if (oauth2Dao.getUserByEmail("email") == null){
-//           MyUser myUser = MyUser.builder().userID(attributes.get("id"))
-//               .name(attributes.get("name")).profile(attributes.get("profile_image")).build();
-//            oauth2Dao.saveUser(myUser);
-//        }
+
         String email = (String) attributes.get("email");
         MyUserDTO user = oauth2Dao.getUserByEmail(email);
-        if (user == null) {
             // 회원가입 작성 !
-            throw new UsernameNotFoundException("회원가입이 필요합니다!");
-        }
+            if (oauth2Dao.getUserByEmail(email) == null){
+                MyUserDTO myUser = MyUserDTO.builder().userID((String) attributes.get("id"))
+                    .name((String) attributes.get("name")).profile(
+                        (String) attributes.get("profile_image")).email(
+                        (String) attributes.get("email")).build();
+                oauth2Dao.saveUser(myUser);
+            }else if (oauth2Dao.getUserByEmail(email) != null){
+                MyUserDTO myUserDTO = MyUserDTO.builder().userID((String) attributes.get("id")).name(
+                    String.valueOf(attributes.get("name"))).profile(
+                    (String) attributes.get("profile")).build();
+                oauth2Dao.updateUser(myUserDTO);
+            }
         user.setAttributes(attributes);
         user.setAuthorities(oAuth2User.getAuthorities());
 //        성공 핸들러로 가정
