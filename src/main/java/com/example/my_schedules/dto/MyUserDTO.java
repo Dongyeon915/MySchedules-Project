@@ -1,6 +1,8 @@
 package com.example.my_schedules.dto;
 
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,7 @@ public class MyUserDTO implements OAuth2User {
     private String email;
     private String name;
     private String profile;
+    private LocalDate join_date;
     private Map<String, Object> attributes;
     private Collection<? extends GrantedAuthority> authorities;
 }
