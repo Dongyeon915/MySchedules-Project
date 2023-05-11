@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class TaskDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    private Integer userId;
+    private String userId;
     private Integer taskId;
     @Size(min = 1,max = 100)
     private String todoTask;

@@ -19,7 +19,6 @@ public class AttributeUtil {
             attributeResult.put("email", email);
             attributeResult.put("profile_image", profile_image);
         } else if (clientName.equals("NAVER")) {
-            System.out.println(attributes);
             Map<String, String> result = (Map<String, String>) attributes.get("response");
             String id = result.get("id");
             String email = result.get("email");

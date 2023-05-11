@@ -42,8 +42,8 @@ public class PomodoroController {
     @PostMapping("/interval/{type}")
     public PomodoroDTO getUserInfo(@RequestBody PomodoroDTO pomodoroDTO,@PathVariable String type) {
         if (pomodoroDAO.getPomodoroByDate(pomodoroDTO) == null) {
-            pomodoroDTO.setRest(10);
-            pomodoroDTO.setMinute(20);
+            pomodoroDTO.setRest(pomodoroDTO.getRest());
+            pomodoroDTO.setMinute(pomodoroDTO.getMinute());
             pomodoroDTO.setInterval(0);
             pomodoroDTO.setRestInterval(0);
             pomodoroDAO.createNewDayPomodoro(pomodoroDTO);

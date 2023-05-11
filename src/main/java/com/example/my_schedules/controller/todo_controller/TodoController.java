@@ -6,7 +6,6 @@ import com.example.my_schedules.dto.TodoResultDTO;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -75,7 +74,7 @@ public class TodoController {
     }
 
     @DeleteMapping
-    public int deleteTaskResult(@RequestBody TodoResultDTO todoResultDTO){
-       return taskDAO.deleteTaskResult(todoResultDTO);
+    public int deleteTaskResult(@RequestBody TodoResultDTO todoResultDTO) {
+        return taskDAO.deleteTaskResult(todoResultDTO);
     }
 }

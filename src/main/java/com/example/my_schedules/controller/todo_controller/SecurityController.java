@@ -17,7 +17,7 @@ public class SecurityController {
 
     @GetMapping("/login")
     public ResponseEntity<Object> loginFailHandler() {
-        return new ResponseEntity<Object>("FUCK YOU Bad User!", HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<Object>("가입되지 않은 사용자 입니다.", HttpStatus.UNAUTHORIZED);
     }
     @GetMapping("/context")
     public Object getContextInfo() {

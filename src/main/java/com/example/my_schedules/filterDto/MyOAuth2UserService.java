@@ -37,15 +37,15 @@ public class MyOAuth2UserService extends DefaultOAuth2UserService {
         MyUserDTO user = oauth2Dao.getUserByEmail(email);
             // 회원가입 작성 !
             if (oauth2Dao.getUserByEmail(email) == null){
-                MyUserDTO myUser = MyUserDTO.builder().userID((String) attributes.get("id"))
-                    .name((String) attributes.get("name")).profile(
-                        (String) attributes.get("profile_image")).email(
-                        (String) attributes.get("email")).build();
-                oauth2Dao.saveUser(myUser);
+                    MyUserDTO myUser = MyUserDTO.builder().userID((String) attributes.get("id"))
+                        .name((String) attributes.get("name")).profile(
+                            (String) attributes.get("profile_image")).email(
+                            (String) attributes.get("email")).build();
+                    oauth2Dao.saveUser(myUser);
             }else if (oauth2Dao.getUserByEmail(email) != null){
                 MyUserDTO myUserDTO = MyUserDTO.builder().userID((String) attributes.get("id")).name(
                     String.valueOf(attributes.get("name"))).profile(
-                    (String) attributes.get("profile")).build();
+                    (String) attributes.get("profile_image")).build();
                 oauth2Dao.updateUser(myUserDTO);
             }
         user.setAttributes(attributes);

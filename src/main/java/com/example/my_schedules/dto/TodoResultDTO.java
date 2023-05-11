@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 @JsonNaming(SnakeCaseStrategy.class)
 public class TodoResultDTO {
-    private Long userId;
+    private String userId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 

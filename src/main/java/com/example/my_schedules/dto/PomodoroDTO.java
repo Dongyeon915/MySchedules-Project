@@ -20,7 +20,7 @@ public class PomodoroDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 //  Local데이트 날만 받는다
     private LocalDate date;
-    private Long userId;
+    private String userId;
     private Integer pomoId;
     private Integer restInterval;
     private Integer interval;
