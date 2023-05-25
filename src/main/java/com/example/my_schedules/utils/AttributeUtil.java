@@ -6,11 +6,13 @@ import java.util.Map;
 public class AttributeUtil {
 
     public static Map<String, Object> getOAuthAttribute(String clientName, Map<String, Object> attributes) {
+
         Map<String, Object> attributeResult = new HashMap<>();
         if (clientName.equals("KAKAO")) {
             Map<String,Object> result = (Map<String,Object>) attributes.get("kakao_account");
             String email = (String) result.get("email");
             String id = "" + attributes.get("id");
+            String dong = (String) attributes.get("email");
             Map<String,Object> profile = (Map<String,Object>) result.get("profile");
             String name = (String) profile.get("nickname");
             String profile_image = (String) profile.get("profile_image_url");
@@ -18,9 +20,15 @@ public class AttributeUtil {
             attributeResult.put("name", name);
             attributeResult.put("email", email);
             attributeResult.put("profile_image", profile_image);
+            attributeResult.put("join_date", dong);
         } else if (clientName.equals("NAVER")) {
             Map<String, String> result = (Map<String, String>) attributes.get("response");
             String id = result.get("id");
+//            byte[] bytes = id.getBytes();
+//            int num = 0;
+//            for (int i = 0; i < bytes.length; i++) {
+//               num += bytes[i];
+//            }
             String email = result.get("email");
             String name = result.get("name");
             String profile_image = result.get("profile_image");

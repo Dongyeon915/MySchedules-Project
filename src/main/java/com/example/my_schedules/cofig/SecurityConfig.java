@@ -21,6 +21,7 @@ public class SecurityConfig {
     @Autowired
     JwtAuthFilter jwtAuthFilter;
 
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.httpBasic().disable();
@@ -30,8 +31,11 @@ public class SecurityConfig {
 
         http.oauth2Login().successHandler(authSuccessHandler);
         http.oauth2Login().loginPage("/login");
+
+
 //        UsernamePasswordAuthenticationFilter principal 세팅
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        // JwtAuthFilter를 UsernamePasswordAuthenticationFilter 앞에 추가하여 JWT 인증 필터 등록
+        http.addFilterBefore(jwtAuthFilter,UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated();
         return http.build();

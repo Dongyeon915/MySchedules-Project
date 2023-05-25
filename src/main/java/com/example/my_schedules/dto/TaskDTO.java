@@ -20,4 +20,5 @@ public class TaskDTO {
     private String todoTask;
     private Boolean checkboxComplete;
     private Date completeTime;
+    private Integer memberId;
 }

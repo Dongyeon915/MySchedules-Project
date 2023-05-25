@@ -19,6 +19,7 @@ public class SecurityController {
     public ResponseEntity<Object> loginFailHandler() {
         return new ResponseEntity<Object>("가입되지 않은 사용자 입니다.", HttpStatus.UNAUTHORIZED);
     }
+
     @GetMapping("/context")
     public Object getContextInfo() {
         SecurityContext securityContext = SecurityContextHolder.getContext();

@@ -22,6 +22,7 @@ public class PomodoroDTO {
     private LocalDate date;
     private String userId;
     private Integer pomoId;
+    private Integer memberId;
     private Integer restInterval;
     private Integer interval;
     private Integer minute;

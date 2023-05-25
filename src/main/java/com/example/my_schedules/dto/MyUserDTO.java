@@ -2,7 +2,6 @@ package com.example.my_schedules.dto;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

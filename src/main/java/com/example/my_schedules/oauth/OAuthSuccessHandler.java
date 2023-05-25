@@ -13,12 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
 
+//    OAuth2UserService # loadUser() 가 실행이 완료되면
+//    세션 방식 로그인에서는 시큐리티 세션(의 Authentication 객체)에 사용자 정보가 들어가게 됩니다.
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
         Authentication authentication) throws IOException, ServletException {
 
         MyUserDTO user = (MyUserDTO) authentication.getPrincipal();
         System.out.println("성공핸들러" + user);
+
         String accessToken = JwtUtil.makeAuthToken(user);
         String refreshToken = JwtUtil.makeRefreshToken();
         System.out.println("액세스 토큰" + accessToken);

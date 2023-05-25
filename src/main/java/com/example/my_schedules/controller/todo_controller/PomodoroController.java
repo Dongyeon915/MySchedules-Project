@@ -49,6 +49,7 @@ public class PomodoroController {
             pomodoroDAO.createNewDayPomodoro(pomodoroDTO);
         }
         if (type.equals("rest")) {
+
             pomodoroDAO.updateRestInterval(pomodoroDTO);
         } else {
             pomodoroDAO.updateInterval(pomodoroDTO);

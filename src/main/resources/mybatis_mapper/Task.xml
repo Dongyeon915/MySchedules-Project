@@ -35,7 +35,7 @@
 
   <!-- 자바 DTO형식으로 GETTER가 생성 되기 때문에 DTO에맞는 형식으로 넣어줘야한다 -->
   <insert id="setTask" parameterType="TaskDto" useGeneratedKeys="true" keyColumn="taskId" keyProperty="taskId">
-    insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date}, #{userId})
+    insert into task values(#{taskId}, #{todoTask}, #{checkboxComplete}, #{completeTime}, #{date}, #{userId},#{memberId})
   </insert>
 
   <!--    userId가 일치하는 user만 가져온다 미사용-->
@@ -64,7 +64,7 @@
 
 <!-- userId를 primary key로 잡으면 데이트는 계속해서 해당날로 insert작업을 수행하기에 date를 임시로 잡아넣었다 입력시 userId를 post로 넣으니 겹치긴힘들다 -->
   <insert id="setDefaultRestTask" parameterType="TodoResultDTO">
-    INSERT INTO todo_result(rest_task,clear_task,date,user_id) VALUES(#{restTask},#{clearTask},#{date},#{userId}) ON DUPLICATE KEY
+    INSERT INTO todo_result(rest_task,clear_task,date,user_id,member_id) VALUES(#{restTask},#{clearTask},#{date},#{userId},#{memberId}) ON DUPLICATE KEY
     UPDATE rest_task = rest_task + 1
   </insert>
 

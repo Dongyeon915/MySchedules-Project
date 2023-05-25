@@ -13,7 +13,7 @@ public class TodoResultDTO {
     private String userId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-
+    private Integer memberId;
     private Integer restTask;
     private Integer clearTask;
 }

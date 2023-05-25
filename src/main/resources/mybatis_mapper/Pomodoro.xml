@@ -30,16 +30,16 @@ useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (defaul
 
   <!-- userId가 일치하는 유저의 interval을 증가 -->
   <update id="updateInterval" parameterType="PomodoroDTO">
-    UPDATE pomodoro SET `interval` = `interval` + 1, date = #{date} where userId = #{userId}
+    UPDATE pomodoro SET `interval` = `interval` + 1 where userId = #{userId} and date = #{date}
   </update>
 
   <!-- userId가 일치하는 유저의 restInterval을 증가 -->
   <update id="updateRestInterval" parameterType="PomodoroDTO">
-    UPDATE pomodoro SET restInterval = restInterval + 1, date = #{date} where userId = #{userId}
+    UPDATE pomodoro SET restInterval = restInterval + 1 where userId = #{userId} and date = #{date}
   </update>
 
   <insert id="createNewDayPomodoro" parameterType="PomodoroDTO" useGeneratedKeys="true" keyProperty="pomoId">
-    INSERT INTO pomodoro values(#{pomoId}, #{interval}, #{restInterval}, #{date}, #{userId}, #{minute}, #{rest})
+    INSERT INTO pomodoro values(#{pomoId}, #{interval}, #{restInterval}, #{date}, #{userId}, #{minute}, #{rest}, #{memberId})
   </insert>
 
 </mapper>
